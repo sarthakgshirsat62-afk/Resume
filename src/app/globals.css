@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 355 100% 97%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 160 84% 39%;
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --emerald: 160 84% 39%;
+    --emerald-light: 152 76% 60%;
+    --nav-height: 64px;
+    --sidebar-width: 260px;
+    --panel-width: 340px;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 5.5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 5.5%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 160 84% 46%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 13%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 160 84% 46%;
+
+    --emerald: 160 84% 46%;
+    --emerald-light: 152 76% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer components {
+  /* Premium gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-400 bg-clip-text text-transparent;
+  }
+
+  /* Subtle grid background */
+  .grid-bg {
+    background-image: linear-gradient(
+        to right,
+        hsl(var(--border)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Glow effect */
+  .glow-emerald {
+    box-shadow: 0 0 40px 0 hsl(var(--emerald) / 0.15);
+  }
+
+  /* Glass morphism card */
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Subtle hover card */
+  .hover-card {
+    @apply transition-all duration-300 hover:border-border hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* Section divider */
+  .section-divider {
+    @apply relative;
+  }
+
+  .section-divider::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-b from-transparent via-border/50 to-transparent;
+    height: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Animated underline for links */
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Tag / badge pill */
+  .tech-tag {
+    @apply inline-flex items-center rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground;
+  }
+
+  /* Code block */
+  .code-inline {
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+  }
+
+  /* Timeline connector */
+  .timeline-line {
+    @apply absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 to-transparent;
+  }
+
+  /* Skeleton pulse */
+  .skeleton {
+    @apply animate-pulse rounded-md bg-muted;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 2px;
+  }
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Prevent layout shift */
+  .contain-layout {
+    contain: layout;
+  }
+}
+
+/* Print styles for resume */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 10pt;
+  }
+
+  .resume-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 15mm;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
