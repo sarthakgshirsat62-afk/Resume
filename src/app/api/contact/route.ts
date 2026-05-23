@@ -9,18 +9,18 @@ export async function POST(request: NextRequest) {
 
     if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
       const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
+        host: process.env.SMTP_HOST ?? "smtp.gmail.com",
         port: Number(process.env.SMTP_PORT ?? 587),
         secure: false,
         auth: {
-          user: process.env.SMTP_USER,
+          user: process.env.SMTP_USER ?? "sarthakgshirsat62@gmail.com",
           pass: process.env.SMTP_PASS,
         },
       });
 
       await transporter.sendMail({
-        from: process.env.EMAIL_FROM ?? "noreply@sarthak.dev",
-        to: "hello@sarthak.dev",
+        from: process.env.EMAIL_FROM ?? "Sarthak <sarthakgshirsat62@gmail.com>",
+        to: "sarthakgshirsat62@gmail.com",
         replyTo: data.email,
         subject: `[Contact] ${data.subject}`,
         text: `From: ${data.name} <${data.email}>\n\n${data.message}`,
