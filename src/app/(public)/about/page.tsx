@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Coffee, GraduationCap, Heart, MapPin } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Container } from "@/components/common/container";
-import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
   title: "About",
@@ -66,7 +62,7 @@ const timeline = [
   {
     year: "2017",
     title: "B.Tech in Information Technology",
-    org: "College of Engineering Pune (COEP)",
+    org: "COEP, Pune",
     description: "Graduated with B.Tech IT. Also completed Advance Diploma in AI Product Management from IIT Madras.",
     icon: "🏛️",
   },
@@ -85,71 +81,77 @@ const values = [
   {
     title: "User-centric design",
     description:
-      "The best products are built with deep empathy for users. I gather real insights through demos and feedback sessions to build what people actually need, not what we imagine they want.",
+      "The best products are built with deep empathy for users. I gather real insights through demos and feedback sessions to build what people actually need.",
   },
   {
     title: "Data drives decisions",
     description:
-      "From $50M+ client savings to 25% cloud cost reductions, every major decision I make is grounded in data and measurable outcomes, not intuition alone.",
+      "From $50M+ client savings to 25% cloud cost reductions, every major decision I make is grounded in data and measurable outcomes.",
   },
   {
     title: "Bridge business and tech",
     description:
-      "My background spans software engineering and product management. I thrive at the intersection — translating complex technical realities into clear product strategy.",
+      "My background spans software engineering and product management. I thrive at the intersection — translating complex technical realities into clear strategy.",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="pt-24 pb-20">
+    <div className="pt-24 pb-24">
       <Container size="md">
-        {/* Header */}
-        <div className="mb-16 space-y-6">
-          <Badge variant="outline">About Me</Badge>
 
-          <div className="flex flex-col sm:flex-row gap-8 items-start">
-            <div className="flex-1 space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight">
+        {/* ── Header ──────────────────────────────────────────── */}
+        <div className="mb-20">
+          <span className="section-label mb-6 inline-flex">About Me</span>
+
+          <div className="flex flex-col sm:flex-row gap-10 items-start mt-6">
+            <div className="flex-1 space-y-5">
+              <h1
+                className="text-4xl sm:text-5xl font-black tracking-tighter leading-tight"
+                style={{ letterSpacing: "-0.04em" }}
+              >
                 Building products that drive{" "}
-                <span className="gradient-text">real-world impact</span>.
+                <span className="gradient-text">real-world impact</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 I&apos;m Sarthak Shirsat — a Product Manager based in{" "}
-                <span className="inline-flex items-center gap-1 text-foreground">
+                <span className="inline-flex items-center gap-1 text-foreground font-medium">
                   <MapPin className="h-4 w-4 text-primary" /> Bengaluru, India
                 </span>
-                . I specialize in AI-powered solutions, cloud-native platforms, and enterprise SaaS
-                products.
+                . I specialise in AI-powered solutions, cloud-native platforms, and enterprise SaaS.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 With 7+ years spanning software engineering and product management, I&apos;ve led
-                end-to-end product lifecycles at Optum (UHG), driven $50M+ in client savings,
-                and improved efficiency across 8M+ annual cases. My MBA from IIM Indore adds
-                a strong foundation in business strategy and user-centric design.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Outside of work, I co-founded a retail startup at IIM Indore, built an AI chatbot,
-                and am always exploring what&apos;s next in GenAI and cloud technology.
+                end-to-end product lifecycles at Optum (UHG), driven $50M+ in client savings, and
+                improved efficiency across 8M+ annual cases. My MBA from IIM Indore adds a strong
+                foundation in business strategy and user-centric design.
               </p>
             </div>
 
-            {/* Profile photo placeholder */}
+            {/* Avatar placeholder */}
             <div className="flex-shrink-0">
-              <div className="h-40 w-40 sm:h-48 sm:w-48 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-border flex items-center justify-center text-6xl">
+              <div
+                className="h-44 w-44 rounded-3xl flex items-center justify-center text-6xl"
+                style={{
+                  background: "linear-gradient(135deg, rgba(96,165,250,0.15), rgba(192,132,252,0.1))",
+                  border: "1px solid var(--card-border)",
+                }}
+              >
                 👨‍💻
               </div>
             </div>
           </div>
         </div>
 
-        <Separator className="my-12" />
+        {/* ── Divider ──────────────────────────────────────────── */}
+        <div className="neon-line my-16" />
 
-        {/* Values */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">What I believe in</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {/* ── Values ──────────────────────────────────────────── */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold tracking-tight mb-8">What I believe in</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {values.map((value) => (
-              <div key={value.title} className="space-y-2">
+              <div key={value.title} className="framer-card p-6 space-y-2">
                 <h3 className="font-semibold text-foreground">{value.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
               </div>
@@ -157,57 +159,77 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <Separator className="my-12" />
+        <div className="neon-line my-16" />
 
-        {/* Timeline */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Career Timeline</h2>
-          <div className="space-y-6">
-            {timeline.map((item, i) => (
-              <div key={i} className="flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted border border-border text-lg">
-                    {item.icon}
+        {/* ── Timeline ─────────────────────────────────────────── */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold tracking-tight mb-10">Career Timeline</h2>
+
+          <div className="relative">
+            {/* Glowing vertical spine */}
+            <div
+              className="timeline-line absolute left-[19px] top-2 bottom-8"
+            />
+
+            <div className="space-y-5">
+              {timeline.map((item, i) => (
+                <div key={i} className="flex gap-6">
+                  {/* Icon node */}
+                  <div className="relative flex-shrink-0 flex h-10 w-10 items-center justify-center">
+                    <span
+                      className="relative flex h-10 w-10 items-center justify-center rounded-xl text-lg z-10"
+                      style={{
+                        background: "hsl(var(--card))",
+                        border: "1px solid var(--card-border)",
+                      }}
+                    >
+                      {item.icon}
+                    </span>
                   </div>
-                  {i < timeline.length - 1 && <div className="mt-2 flex-1 w-px bg-border" />}
-                </div>
-                <div className="pb-6 flex-1">
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="text-xs font-mono text-primary">{item.year}</span>
-                    <span className="text-xs text-muted-foreground">·</span>
-                    <span className="text-sm font-semibold">{item.title}</span>
-                    <span className="text-xs text-muted-foreground">@ {item.org}</span>
+
+                  {/* Content card */}
+                  <div className="framer-card flex-1 p-5 mb-2">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2">
+                      <span className="data-label">{item.year}</span>
+                      <span className="text-muted-foreground/40 text-xs">·</span>
+                      <span className="text-sm font-semibold text-foreground">{item.title}</span>
+                      <span className="text-xs text-primary font-mono">@ {item.org}</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        <Separator className="my-12" />
+        <div className="neon-line my-16" />
 
-        {/* Interests */}
+        {/* ── Interests ─────────────────────────────────────────── */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6">Outside of work</h2>
-          <div className="flex flex-wrap gap-3">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Outside of work</h2>
+          <div className="flex flex-wrap gap-2.5">
             {interests.map((interest) => (
               <div
                 key={interest.label}
-                className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm"
+                className="flex items-center gap-2 rounded-2xl px-4 py-2 text-sm"
+                style={{
+                  background: "hsl(var(--card))",
+                  border: "1px solid var(--card-border)",
+                }}
               >
                 <span>{interest.emoji}</span>
-                <span className="text-muted-foreground">{interest.label}</span>
+                <span className="text-muted-foreground font-medium">{interest.label}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* CTA */}
+        {/* ── CTA ──────────────────────────────────────────────── */}
         <div className="flex flex-wrap gap-3">
-          <Button variant="glow" asChild>
+          <Button variant="white" asChild>
             <Link href="/contact">
-              Get in touch <ArrowRight className="ml-1 h-4 w-4" />
+              Get in touch <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
           <Button variant="outline" asChild>
