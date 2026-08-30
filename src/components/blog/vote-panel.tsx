@@ -6,6 +6,7 @@ import type { BlogVoteSummary } from "@/features/blog/types";
 import { cn } from "@/utils/cn";
 import { ThumbsDown, ThumbsUp } from "@phosphor-icons/react";
 import { useEffect, useState, useTransition } from "react";
+import { toast } from "sonner";
 
 export function VotePanel({
   postSlug,
@@ -27,10 +28,14 @@ export function VotePanel({
 
   function handleVote(value: 1 | -1) {
     if (!visitorId || isPending) return;
-    const previous = summary;
     startTransition(async () => {
-      const next = await castVote({ postSlug, visitorId, value }).catch(() => previous);
-      setSummary(next);
+      try {
+        const next = await castVote({ postSlug, visitorId, value });
+        setSummary(next);
+      } catch (error) {
+        console.error("Failed to cast vote:", error);
+        toast.error("Couldn't save your vote. Please try again.");
+      }
     });
   }
 
