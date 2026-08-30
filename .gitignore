@@ -25,9 +25,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Drizzle
-drizzle/
-
 # OS
 .DS_Store
 Thumbs.db

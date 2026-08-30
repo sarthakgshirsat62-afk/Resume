@@ -8,6 +8,12 @@ Authentication strategy, session management, protected routes, and the owner-onl
 
 This is a **single-owner application**. Only Sarthak (the site owner) needs to authenticate. Authentication gates the dashboard and resume editor. All public-facing pages (homepage, resume view, portfolio) are fully public.
 
+**Exception — blog comments and reactions:** blog post comments and thumbs up/down votes are the one place anonymous visitors write to the database, with no account required. This is a deliberate scope decision (see `/docs/blog.md`), not an oversight:
+- Commenters supply a free-text name (and optional, never-displayed email) — not a `users` row.
+- Voters are identified only by a random UUID generated client-side and stored in `localStorage` — not a session.
+- Spam defense is minimal by design: a honeypot field on the comment form, and owner-only delete moderation from `/dashboard/comments`. There is no rate limiting or approval queue.
+- If abuse becomes a real problem, revisit this — e.g. require sign-in to comment — rather than layering fixes onto anonymous writes.
+
 ---
 
 ## Library: Better Auth

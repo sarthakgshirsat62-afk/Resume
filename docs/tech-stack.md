@@ -105,6 +105,20 @@ All libraries and tools used in this project, with rationale. No new dependency 
 
 ---
 
+## Blog Content
+
+### gray-matter
+- **Why:** Parses the YAML frontmatter block (`title`, `date`, `description`) out of each Markdown post file.
+- **Pattern:** Used in `src/features/blog/utils/posts.ts` at build/request time — never in client components.
+
+### remark + remark-gfm + remark-html
+- **Why:** Converts a post's Markdown body to HTML. `remark-gfm` adds GitHub-flavored tables, strikethrough, and task lists. `remark-html` compiles the final HTML string.
+- **Pattern:** `remark().use(remarkGfm).use(remarkHtml).process(content)` — see `src/features/blog/utils/posts.ts`.
+- **Trust boundary:** Post content is authored only by the site owner via files committed to the repo, not user-submitted — so the resulting HTML is rendered via `dangerouslySetInnerHTML` without sanitization. If posts ever become user- or third-party-submitted, add `rehype-sanitize` before that changes.
+- **See:** `/docs/blog.md` for the full content pipeline.
+
+---
+
 ## Email
 
 ### React Email
@@ -149,7 +163,7 @@ These are **not currently in the stack** but are approved for future phases:
 | Addition | Phase | Reason |
 |---|---|---|
 | `@ai-sdk/anthropic` | AI resume tailoring | Claude API for AI-powered features |
-| Keystatic / Sanity | Blog/CMS | When blog content feature is added |
+| Keystatic / Sanity | Blog CMS UI | Only if an in-browser post editor is wanted later — the current blog is plain Markdown files in `content/blog/`, no CMS needed |
 | Algolia | Search | If case studies or blog posts grow large |
 | Plausible | Analytics | Privacy-first analytics when needed |
 | Stripe | Payments | If premium templates or exports are monetized |

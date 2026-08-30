@@ -85,10 +85,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${base}/`, changeFrequency: "monthly", priority: 1 },
     { url: `${base}/portfolio`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/blog`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/about`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/contact`, changeFrequency: "yearly", priority: 0.5 },
     // Add resume slug if public
     { url: `${base}/resume/${publicSlug}`, changeFrequency: "weekly", priority: 0.9 },
+    // One entry per file in content/blog/ — see getAllPosts() in docs/blog.md
+    ...blogPosts.map((post) => ({ url: `${base}/blog/${post.slug}`, changeFrequency: "monthly", priority: 0.6 })),
   ];
 }
 ```
@@ -196,6 +199,7 @@ const inter = Inter({
 | Homepage | Static (SSG) | On deploy |
 | Resume public page | ISR | `revalidate: 3600` (1 hour) |
 | Portfolio page | Static (SSG) | On deploy |
+| Blog listing + post pages | Static (SSG) | On deploy — new posts appear on the next build |
 | About page | Static (SSG) | On deploy |
 | Dashboard pages | No cache (dynamic) | — |
 | API routes | No cache | — |

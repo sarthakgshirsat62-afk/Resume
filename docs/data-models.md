@@ -257,6 +257,67 @@ export const resumeSections = pgTable("resume_sections", {
 
 **Note:** Section data is stored as `jsonb` for flexibility. The Zod discriminated union validates it at the application layer.
 
+```ts
+export const blogComments = pgTable("blog_comments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  postSlug: varchar("post_slug", { length: 256 }).notNull(),  // no FK — posts are files, not DB rows
+  parentId: uuid("parent_id"),                                 // null = top-level; app layer enforces one level of nesting
+  authorName: varchar("author_name", { length: 80 }).notNull(),
+  authorEmail: varchar("author_email", { length: 256 }),
+  body: text("body").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const blogVotes = pgTable("blog_votes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  postSlug: varchar("post_slug", { length: 256 }).notNull(),
+  visitorId: uuid("visitor_id").notNull(),
+  value: integer("value").notNull(),   // 1 or -1
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  // unique index on (postSlug, visitorId) — one vote per visitor per post
+});
+```
+
+---
+
+## Blog Comment
+
+```ts
+// src/schemas/blog.ts
+export const createCommentInputSchema = z.object({
+  postSlug: z.string().min(1),
+  parentId: z.string().uuid().optional(),   // one level of nesting only — a reply's parent must itself be top-level
+  authorName: z.string().trim().min(1).max(80),
+  authorEmail: z.string().trim().email().optional().or(z.literal("")),  // never displayed publicly
+  body: z.string().trim().min(1).max(2000),
+  honeypot: z.string().optional().or(z.literal("")),  // spam trap — must stay empty
+});
+
+export type CreateCommentInput = z.infer<typeof createCommentInputSchema>;
+```
+
+**DB table:** `blog_comments`
+**Identity:** No account required — `authorName`/`authorEmail` are free-text supplied by the commenter, not linked to `users`. See `/docs/auth.md` for why this is a deliberate exception to the owner-only auth model.
+**Moderation:** Comments publish instantly. The owner can delete any comment (and its replies) from `/dashboard/comments`.
+
+---
+
+## Blog Vote (thumbs up/down)
+
+```ts
+// src/schemas/blog.ts
+export const castVoteInputSchema = z.object({
+  postSlug: z.string().min(1),
+  visitorId: z.string().uuid(),   // anonymous, browser-generated — stored in localStorage, not tied to a user account
+  value: z.union([z.literal(1), z.literal(-1)]),
+});
+```
+
+**DB table:** `blog_votes`
+**Uniqueness:** One row per `(post_slug, visitor_id)` — enforced by a unique index. Casting the same vote again removes it (toggle off); casting the opposite vote updates it.
+**Note:** `visitorId` is a random UUID generated client-side on first visit — not an authenticated identity. Clearing browser storage resets a visitor's vote state. This is an intentional low-stakes tradeoff, not a bug.
+
 ---
 
 ## Contact Form

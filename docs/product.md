@@ -53,12 +53,12 @@ A premium personal portfolio and resume platform — polished, fast, and SEO-opt
 
 ## Phase 2 — Content Expansion
 
-| Feature | Description |
-|---|---|
-| Blog | Markdown-based blog with tagging, SEO, and RSS feed |
-| Case studies | Long-form project write-ups with image galleries |
-| Multiple resume templates | 3-5 visual templates selectable in editor |
-| Custom theme | Color palette picker per resume template |
+| Feature | Description | Status |
+|---|---|---|
+| Blog | Markdown-based blog — posts are files in `content/blog/`, listing + post pages generated automatically. Includes thumbs up/down reactions and anonymous, one-level-deep comments (Postgres-backed, owner-moderated). See `/docs/blog.md`. Tagging and RSS not yet built. | Shipped (MVP) |
+| Case studies | Long-form project write-ups with image galleries | Planned |
+| Multiple resume templates | 3-5 visual templates selectable in editor | Planned |
+| Custom theme | Color palette picker per resume template | Planned |
 
 ---
 

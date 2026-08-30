@@ -5,6 +5,7 @@ import { Container } from "./container";
 const footerLinks = [
   { href: "/resume", label: "Resume" },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

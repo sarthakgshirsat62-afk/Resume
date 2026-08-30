@@ -34,6 +34,11 @@ export function formatRelativeTime(date: Date): string {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+export function parseDateOnly(dateStr: string): Date {
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return new Date(year ?? 1970, (month ?? 1) - 1, day ?? 1);
+}
+
 export function formatFullDate(date: Date): string {
   return date.toLocaleDateString("en-US", {
     month: "long",

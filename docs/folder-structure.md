@@ -10,6 +10,8 @@ Directory layout, file naming conventions, and colocation rules.
 SarthakResume/
 ├── CLAUDE.md                    # AI context — read first every session
 ├── docs/                        # All project documentation
+├── content/                     # Owner-authored content (not code)
+│   └── blog/                    # Blog posts — one Markdown file per post
 ├── public/                      # Static assets (favicon, OG images, fonts)
 │   ├── fonts/
 │   ├── images/
@@ -39,6 +41,10 @@ src/
 │   │   │       └── page.tsx     # Public resume view
 │   │   ├── portfolio/
 │   │   │   └── page.tsx
+│   │   ├── blog/
+│   │   │   ├── page.tsx         # Blog listing — newest first
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx     # Single post, statically generated per file in content/blog/
 │   │   ├── about/
 │   │   │   └── page.tsx
 │   │   └── contact/
@@ -51,11 +57,13 @@ src/
 │   ├── dashboard/               # Protected — requires auth
 │   │   ├── layout.tsx           # Dashboard shell (sidebar, nav)
 │   │   ├── page.tsx             # Dashboard home
-│   │   └── resumes/
-│   │       ├── page.tsx         # Resume list
-│   │       └── [id]/
-│   │           └── edit/
-│   │               └── page.tsx # Resume editor
+│   │   ├── resumes/
+│   │   │   ├── page.tsx         # Resume list
+│   │   │   └── [id]/
+│   │   │       └── edit/
+│   │   │           └── page.tsx # Resume editor
+│   │   └── comments/
+│   │       └── page.tsx         # Moderation — delete any blog comment/reply
 │   ├── api/                     # Route Handlers
 │   │   └── auth/
 │   │       └── [...all]/
@@ -85,6 +93,13 @@ src/
 │   │   ├── section-panel.tsx
 │   │   ├── section-form.tsx
 │   │   └── ...
+│   ├── blog/                    # Blog listing/post UI
+│   │   ├── post-card.tsx        # Listing card — title, date, excerpt
+│   │   ├── vote-panel.tsx       # Thumbs up/down widget (client)
+│   │   ├── comment-section.tsx  # Top-level comment list + new-comment form (client)
+│   │   ├── comment-item.tsx     # One comment + its replies + reply form (client)
+│   │   ├── comment-form.tsx     # Shared comment/reply form, RHF + Zod (client)
+│   │   └── delete-comment-button.tsx  # Owner-only moderation delete (client)
 │   └── pdf/                     # react-pdf components (PDF export only)
 │       ├── pdf-document.tsx
 │       ├── pdf-section-experience.tsx
@@ -98,6 +113,12 @@ src/
 │   ├── pdf-export/
 │   │   ├── hooks/
 │   │   └── utils/
+│   ├── blog/
+│   │   ├── utils/posts.ts       # Reads content/blog/, parses frontmatter, renders Markdown → HTML
+│   │   ├── utils/comments.ts    # Reads blog_comments from Postgres (Server Component use only)
+│   │   ├── hooks/use-visitor-id.ts  # Anonymous per-browser id (localStorage) for votes/comments
+│   │   ├── actions.ts           # Server Actions: addComment, deleteComment, castVote, getVoteSummary
+│   │   └── types.ts
 │   └── auth/
 │       ├── hooks/
 │       └── guards.tsx
@@ -117,6 +138,7 @@ src/
 │   ├── resume.ts                # Resume + section schemas
 │   ├── user.ts
 │   ├── contact.ts
+│   ├── blog.ts                  # Blog post frontmatter schema
 │   └── shared.ts                # Reusable sub-schemas (dateRange, richText, etc.)
 │
 ├── store/                       # Zustand stores (client-side UI state only)

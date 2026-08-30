@@ -1,22 +1,16 @@
 "use client";
 
-import {
-  BookOpen,
-  FolderOpen,
-  GearSix,
-  House,
-  SignOut,
-} from "@phosphor-icons/react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { signOut } from "@/lib/auth-client";
-import { initials } from "@/utils/string";
 import { cn } from "@/utils/cn";
+import { initials } from "@/utils/string";
+import { BookOpen, ChatCircle, FolderOpen, GearSix, House, SignOut } from "@phosphor-icons/react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface DashboardSidebarProps {
   user: { name: string; email: string; image?: string | null };
@@ -25,6 +19,7 @@ interface DashboardSidebarProps {
 const navItems = [
   { href: "/dashboard", icon: House, label: "Dashboard", exact: true },
   { href: "/dashboard/resumes", icon: BookOpen, label: "Resumes" },
+  { href: "/dashboard/comments", icon: ChatCircle, label: "Comments" },
   { href: "/portfolio", icon: FolderOpen, label: "Portfolio", external: true },
 ];
 

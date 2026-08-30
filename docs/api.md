@@ -119,6 +119,24 @@ POST /api/contact          ← Contact form submission → sends email via Nodem
 |---|---|---|
 | `submitContactForm` | `ContactForm` | Validates + sends email |
 
+### Blog Comment Actions
+
+Defined in `src/features/blog/actions.ts`. No authentication for reads/creates — anonymous by design (see `/docs/auth.md`). `deleteComment` is owner-only.
+
+| Action | Input | Description |
+|---|---|---|
+| `addComment` | `CreateCommentInput` | Validates postSlug exists; if replying, validates the parent is top-level (one level of nesting only). Silently no-ops if the honeypot field is filled |
+| `deleteComment` | `{ commentId: string }` | Owner-only. Deletes the comment and any replies to it in one transaction |
+
+### Blog Vote Actions
+
+Also in `src/features/blog/actions.ts`. Anonymous — identified by a client-generated `visitorId`, not a session.
+
+| Action | Input | Description |
+|---|---|---|
+| `getVoteSummary` | `{ postSlug, visitorId? }` | Returns `{ upvotes, downvotes, myVote }`. `myVote` is `0` when `visitorId` is omitted |
+| `castVote` | `{ postSlug, visitorId, value: 1 \| -1 }` | Upserts the visitor's vote; casting the same value again removes it (toggle off) |
+
 ---
 
 ## Error Handling
