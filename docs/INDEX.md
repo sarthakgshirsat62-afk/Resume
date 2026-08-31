@@ -30,6 +30,7 @@ Central map of all project documentation. Every doc is listed here with a one-li
 |---|---|
 | [resume-editor.md](resume-editor.md) | Resume builder workflow, section architecture, data flow, live preview |
 | [blog.md](blog.md) | Blog content model, publishing workflow, Markdown rendering pipeline |
+| [blog-post-format.md](blog-post-format.md) | Copy-paste reference for writing a new post's frontmatter + Markdown |
 | [pdf-export.md](pdf-export.md) | PDF generation pipeline, templates, supported formats |
 | [auth.md](auth.md) | Authentication strategy, session management, protected routes |
 | [data-models.md](data-models.md) | Zod schemas, database tables, TypeScript types, relations |
