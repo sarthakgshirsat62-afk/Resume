@@ -37,8 +37,7 @@ src/
 │   ├── (public)/                # Route group: no auth required
 │   │   ├── page.tsx             # Homepage
 │   │   ├── resume/
-│   │   │   └── [slug]/
-│   │   │       └── page.tsx     # Public resume view
+│   │   │   └── page.tsx         # Public resume view (static, single resume — no [slug] yet)
 │   │   ├── portfolio/
 │   │   │   └── page.tsx
 │   │   ├── blog/
@@ -83,11 +82,10 @@ src/
 │   │   ├── site-footer.tsx
 │   │   ├── nav-link.tsx
 │   │   └── theme-toggle.tsx
-│   ├── resume/                  # Resume rendering components (public view + preview)
-│   │   ├── resume-renderer.tsx
-│   │   ├── section-experience.tsx
-│   │   ├── section-education.tsx
-│   │   └── ...
+│   ├── resume/                  # Resume rendering components (public view)
+│   │   ├── resume-data.ts       # Static resume content — shared with pdf/pdf-document.tsx
+│   │   ├── resume-view.tsx      # Renders the resume as HTML on /resume
+│   │   └── download-resume-button.tsx  # "Download PDF" button (client)
 │   ├── editor/                  # Editor-specific UI (dashboard only)
 │   │   ├── editor-shell.tsx
 │   │   ├── section-panel.tsx
@@ -101,9 +99,8 @@ src/
 │   │   ├── comment-form.tsx     # Shared comment/reply form, RHF + Zod (client)
 │   │   └── delete-comment-button.tsx  # Owner-only moderation delete (client)
 │   └── pdf/                     # react-pdf components (PDF export only)
-│       ├── pdf-document.tsx
-│       ├── pdf-section-experience.tsx
-│       └── ...
+│       ├── pdf-document.tsx     # Whole resume as one PDF (see docs/pdf-export.md)
+│       └── pdf-styles.ts
 │
 ├── features/                    # Feature modules — colocated logic
 │   ├── resume-editor/           # All logic specific to the resume editor
@@ -111,8 +108,8 @@ src/
 │   │   ├── utils/
 │   │   └── types.ts
 │   ├── pdf-export/
-│   │   ├── hooks/
-│   │   └── utils/
+│   │   ├── hooks/use-pdf-export.ts    # Drives export: loading state, download, error toast
+│   │   └── utils/generate-pdf.tsx     # Renders <PdfDocument /> to a Blob (dynamically imported)
 │   ├── blog/
 │   │   ├── utils/posts.ts       # Reads content/blog/, parses frontmatter, renders Markdown → HTML
 │   │   ├── utils/comments.ts    # Reads blog_comments from Postgres (Server Component use only)

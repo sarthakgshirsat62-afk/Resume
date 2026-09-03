@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import { DownloadSimple } from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/common/container";
+import { DownloadResumeButton } from "@/components/resume/download-resume-button";
+import { ResumeView } from "@/components/resume/resume-view";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ResumeView } from "@/components/resume/resume-view";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -25,15 +24,7 @@ export default function ResumePage() {
             <p className="text-muted-foreground text-sm">Product Manager</p>
           </div>
           <div className="flex gap-2">
-            <Button
-              id="download-pdf-btn"
-              variant="glow"
-              size="sm"
-              className="gap-2"
-            >
-              <DownloadSimple weight="bold" className="h-4 w-4" />
-              Download PDF
-            </Button>
+            <DownloadResumeButton />
           </div>
         </div>
 

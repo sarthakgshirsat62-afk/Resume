@@ -24,7 +24,7 @@ A premium personal portfolio and resume platform — polished, fast, and SEO-opt
 |---|---|---|
 | Public resume page | Shareable, SEO-optimized `/resume` page with JSON-LD structured data | Planned |
 | Resume editor | Private dashboard to edit all resume sections (drag-and-drop, rich text) | Planned |
-| PDF export | One-click download of resume as PDF, client-side generation | Planned |
+| PDF export | One-click download of resume as PDF, client-side generation | Shipped (public `/resume` page) |
 | Portfolio/projects page | Curated list of selected projects with descriptions and links | Planned |
 | About page | Personal bio, skills summary, and contact info | Planned |
 | Contact form | Email submission via React Email + Nodemailer | Planned |

@@ -2,23 +2,30 @@
 
 PDF generation pipeline, template system, supported formats, and limitations.
 
+**Status:** Implemented for the public resume page (`/resume`) only. The resume there is
+static, single-template content (`src/components/resume/resume-data.ts`) — not yet the
+dynamic, DB-backed, multi-resume system `data-models.md` describes for the future editor.
+When that editor ships, this pipeline needs to generalize (accept a resume ID, support
+multiple templates); until then, the structure below is intentionally simpler than what
+this doc originally specified.
+
 ---
 
 ## Approach: Client-Side Generation
 
 PDF export runs entirely in the browser using `@react-pdf/renderer`. No server round-trip, no Puppeteer, no headless browser.
 
-**Trigger:** User clicks "Download PDF" button in the editor header or on the public resume page.
+**Trigger:** User clicks "Download PDF" on the public resume page (`src/components/resume/download-resume-button.tsx`).
 
 **Pipeline:**
 ```
 User clicks Download
-  → Load latest resume data (from TanStack Query cache)
-  → Dynamically import PDFDocument component (code-split for bundle size)
-  → Pass resume data to PDFDocument
-  → @react-pdf/renderer renders to ArrayBuffer in browser
-  → Blob URL created → <a> click triggered → file download
+  → usePdfExport hook sets isGenerating
+  → Dynamically import generate-pdf.tsx (code-split — keeps @react-pdf/renderer out of the main bundle)
+  → generateResumePdf() renders <PdfDocument /> to a Blob in-browser
+  → Blob URL created → <a> click triggered → file download ("<Name>_Resume.pdf")
   → Blob URL revoked
+  → On failure: toast error, logged to console
 ```
 
 ---
@@ -26,23 +33,28 @@ User clicks Download
 ## Code Structure
 
 ```
+src/components/resume/
+├── resume-data.ts                # Single source of truth for resume content —
+│                                  # imported by both ResumeView (HTML) and PdfDocument (PDF)
+└── download-resume-button.tsx    # Client button wiring usePdfExport to the UI
+
 src/components/pdf/
-├── pdf-document.tsx              # Root PDF document component
-├── pdf-personal-info.tsx         # Personal info header
-├── pdf-section-experience.tsx    # Experience section
-├── pdf-section-education.tsx     # Education section
-├── pdf-section-skills.tsx        # Skills section
-├── pdf-section-projects.tsx      # Projects section
-├── pdf-section-certifications.tsx
-├── pdf-section-custom.tsx
-└── pdf-styles.ts                 # Shared style objects for PDF
+├── pdf-document.tsx              # Whole resume as one PDF document (all sections inline —
+│                                  # not split into one file per section; see note below)
+└── pdf-styles.ts                 # StyleSheet objects mirroring resume-view.tsx's design
 
 src/features/pdf-export/
 ├── hooks/
-│   └── use-pdf-export.ts         # Hook that drives the export flow
+│   └── use-pdf-export.ts         # Drives the export flow: loading state, download, error toast
 └── utils/
-    └── generate-pdf.ts           # Core pdf generation function
+    └── generate-pdf.tsx          # Core pdf generation function (dynamically imported)
 ```
+
+**Why one `pdf-document.tsx` instead of one file per section:** the original spec below
+(section-by-section files, per-template `pdfStyles`, `templateId` routing) assumes a
+dynamic multi-template, multi-resume system. The actual resume is one static page with a
+fixed layout, so splitting it into 8 near-empty files would be premature structure with no
+current benefit. Revisit this split if/when multiple resume templates are actually built.
 
 ---
 
@@ -70,65 +82,44 @@ PDF components use `@react-pdf/renderer` primitives, not HTML:
 
 ## PDF Styles
 
-All PDF styles are defined in `src/components/pdf/pdf-styles.ts` as StyleSheet objects:
+All PDF styles are defined in `src/components/pdf/pdf-styles.ts` as StyleSheet objects, hand-matched to `resume-view.tsx`'s Tailwind design (emerald accent, muted body text, etc.) resolved to literal hex values — a PDF has no dark mode, so it always renders the light-mode palette, the same way the existing print CSS (`@media print` in `globals.css`) always forces a white background regardless of site theme.
 
 ```ts
 import { StyleSheet } from "@react-pdf/renderer";
 
 export const pdfStyles = StyleSheet.create({
-  page: {
-    fontFamily: "Inter",
-    fontSize: 10,
-    padding: "12mm 15mm",
-    color: "#1a1a1a",
-    lineHeight: 1.4,
-  },
-  sectionTitle: {
-    fontSize: 12,
-    fontWeight: "bold",
-    marginBottom: 4,
-    borderBottom: "1pt solid #e5e7eb",
-    paddingBottom: 3,
-  },
-  entryTitle: {
-    fontSize: 11,
-    fontWeight: "semibold",
-  },
+  page: { fontFamily: "Helvetica", fontSize: 9.5, color: "#171717", padding: "14mm 16mm" },
+  sectionTitle: { fontSize: 9, fontFamily: "Helvetica-Bold", color: "#059669", /* ... */ },
+  entryTitle: { fontSize: 10, fontFamily: "Helvetica-Bold" },
   // ...
 });
 ```
 
-**Template theming in PDF:** Each template exports its own `pdfStyles` object. The `PDFDocument` root component receives `templateId` and imports the appropriate styles.
+**Template theming:** not yet applicable — see the "Status" note above. There's one style
+object for the one template that exists.
 
 ---
 
 ## Font Registration
 
-Fonts must be registered before any PDF render:
+**Not used.** The implementation uses `@react-pdf/renderer`'s built-in standard fonts
+(`Helvetica` / `Helvetica-Bold`) rather than registering Geist (the site's actual font,
+via `next/font/google` — the "Inter" example previously in this doc didn't match what the
+site uses) or any other web font. Reasoning:
+- `next/font/google`-optimized files don't have a stable public URL to register from.
+- Registering a font from an external CDN URL adds a runtime network dependency to PDF
+  generation and a fragile hardcoded, versioned URL.
+- Helvetica is visually close enough to Geist for this purpose, and guarantees the export
+  always works offline with zero extra requests.
 
-```ts
-// src/features/pdf-export/utils/register-fonts.ts
-import { Font } from "@react-pdf/renderer";
-
-Font.register({
-  family: "Inter",
-  fonts: [
-    { src: "/fonts/Inter-Regular.woff2" },
-    { src: "/fonts/Inter-Medium.woff2", fontWeight: "medium" },
-    { src: "/fonts/Inter-SemiBold.woff2", fontWeight: "semibold" },
-    { src: "/fonts/Inter-Bold.woff2", fontWeight: "bold" },
-  ],
-});
-```
-
-Called once at the top of `generate-pdf.ts` before rendering.
+Revisit if exact font fidelity becomes a requirement — e.g. by self-hosting a Geist
+`.ttf`/`.otf` file under `public/fonts/` and calling `Font.register()` with that local path.
 
 ---
 
 ## Page Setup
 
 ```ts
-// A4 page in mm
 <Page size="A4" style={pdfStyles.page}>
   ...
 </Page>
@@ -136,24 +127,19 @@ Called once at the top of `generate-pdf.ts` before rendering.
 
 - **Size:** A4 (210mm × 297mm)
 - **Orientation:** Portrait only
-- **Margins:** 12mm top/bottom, 15mm left/right (default template)
+- **Margins:** 14mm top/bottom, 16mm left/right
+- **Pagination:** `@react-pdf/renderer` paginates automatically; each experience/education/
+  certification entry uses `wrap={false}` so a single entry never splits across a page break
 - **Bleed/crop marks:** Not required for personal resume
 
 ---
 
 ## Rich Text in PDF
 
-Experience/project descriptions are stored as HTML strings. `react-pdf-html` parses HTML and renders to PDF-compatible elements:
-
-```ts
-import Html from "react-pdf-html";
-
-<Html>{entry.description}</Html>
-```
-
-**Supported HTML tags:** `<p>`, `<strong>`, `<em>`, `<u>`, `<ul>`, `<ol>`, `<li>`, `<a>`
-
-**Unsupported:** `<table>`, `<img>`, `<div>`, custom classes — sanitize before passing.
+**Not applicable yet.** The current resume content (`resume-data.ts`) is plain strings, not
+HTML — `react-pdf-html` isn't installed or needed. If experience/project descriptions ever
+become rich text (matching the dynamic resume schema in `data-models.md`), reintroduce
+`react-pdf-html` at that point rather than before.
 
 ---
 
@@ -161,30 +147,34 @@ import Html from "react-pdf-html";
 
 ```ts
 // src/features/pdf-export/hooks/use-pdf-export.ts
-export function usePdfExport(resumeId: string) {
-  const { data: resume } = useResume(resumeId);
+export function usePdfExport(fileName: string) {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const exportPdf = useCallback(async () => {
-    if (!resume) return;
     setIsGenerating(true);
     try {
-      const { generatePdf } = await import("../utils/generate-pdf");
-      const blob = await generatePdf(resume);
+      const { generateResumePdf } = await import("@/features/pdf-export/utils/generate-pdf");
+      const blob = await generateResumePdf();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${resume.title.replace(/\s+/g, "_")}.pdf`;
+      a.download = `${fileName}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Failed to generate resume PDF:", error);
+      toast.error("Couldn't generate the PDF. Please try again.");
     } finally {
       setIsGenerating(false);
     }
-  }, [resume]);
+  }, [fileName]);
 
   return { exportPdf, isGenerating };
 }
 ```
+
+Unlike the original spec, this doesn't take a `resumeId` or read from TanStack Query — the
+resume page has one static resume, so the hook just takes the file name to save as.
 
 ---
 
@@ -192,8 +182,8 @@ export function usePdfExport(resumeId: string) {
 
 | Format | Library | Status |
 |---|---|---|
-| PDF | @react-pdf/renderer | Phase 1 |
-| JSON | Native JSON.stringify | Phase 1 (resume data backup) |
+| PDF | @react-pdf/renderer | **Shipped** (public resume page only) |
+| JSON | Native JSON.stringify | Not built |
 | DOCX | `docx` library | Phase 4 |
 | Print CSS | Browser print | Phase 4 (fallback) |
 
