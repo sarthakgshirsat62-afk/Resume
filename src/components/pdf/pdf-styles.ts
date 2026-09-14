@@ -45,7 +45,7 @@ export const pdfStyles = StyleSheet.create({
   bulletMark: { width: 10, color: emerald },
   bulletText: { flex: 1, color: muted },
   skillRow: { flexDirection: "row", marginBottom: 3 },
-  skillCategory: { width: 70, fontFamily: "Helvetica-Bold", fontSize: 8.5, color: foreground },
+  skillCategory: { width: 95, fontFamily: "Helvetica-Bold", fontSize: 8.5, color: foreground },
   skillItems: { flex: 1, fontSize: 8.5, color: muted },
   certRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 3, gap: 8 },
 });

@@ -9,7 +9,7 @@ export const resumeData = {
     linkedin: "www.linkedin.com/in/sarth1964",
     github: "",
     summary:
-      "Product Manager with 7+ years of experience in AI-powered solutions, cloud-native platforms, workflow optimization and cloud Policy & Governance. Proven ability to lead end-to-end product lifecycles, drive cost savings ($50M+ client impact), and improve efficiency across analytics and enterprise SaaS. MBA from IIM Indore with expertise in B2B/B2C product strategy, agile delivery, and user-centric design.",
+      "Senior Technical Product Manager with 7+ years of experience bridging deep technical architecture with user-centric enterprise SaaS. Proven track record of steering 0-to-1 AI/ML products, driving cloud infrastructure strategy, and delivering $50M+ in client impact. Combines an MBA from IIM Indore with hands-on software engineering expertise to align cross-functional engineering teams, optimize cloud governance, and design intuitive, high-scale digital user journeys.",
   },
   experience: [
     {
@@ -21,10 +21,10 @@ export const resumeData = {
       endDate: "",
       isCurrent: true,
       highlights: [
-        "Led enterprise-wide cloud policy & governance framework across AWS, Azure and GCP.",
-        "Built automated guardrails (IAM, network, encryption, data residency, logging) using Azure Policy, AWS SCPs and GCP Org Policies.",
-        "Designed cost & usage governance model (FinOps) with budgets, anomaly detection and chargeback across clouds, helping engineering teams cut wasted cloud spend by ~25% while maintaining performance SLAs.",
-        "Partnered with Security, Compliance, Legal and Platform Engineering to enable self-service cloud onboarding with policy-as-code, shrinking environment provisioning time from weeks to hours without increasing risk.",
+        "Accelerated enterprise cloud and AI adoption by launching a multi-cloud Service Governance application that introduced self-service workflows for new service requests and AI model governance.",
+        "Standardized multi-cloud adoption and centralized consumption alerting by delivering a unified UI experience for cloud onboarding across Cloud Service Providers (CSPs).",
+        "Identified strategic migration opportunities and optimized infrastructure by analyzing 1,991 cloud databases, including 578 deployed on NextGen networking.",
+        "Established robust, enterprise-wide automated guardrails for IAM, data residency, and encryption using Azure Policy, AWS SCPs, and GCP Org Policies.",
       ],
     },
     {
@@ -36,11 +36,11 @@ export const resumeData = {
       endDate: "2025-03",
       isCurrent: false,
       highlights: [
-        "Led the end-to-end product lifecycle of an AI-powered chatbot for Prior Authorization (PA) users, reducing manual job-aid searches and saving 30+ minutes per case.",
-        "Redesigned and restructured 150K+ clinical guidelines, collaborating with clinicians, architects, and stakeholders, enabling AI data models and boosting system usability and response times.",
-        "Migrated a high-volume fax system (10K+/hr) to a cloud-native solution, improving security, scalability, and operational resilience.",
-        "Directed UI/UX redesign initiatives for PA workflows, streamlining user journeys and improving efficiency across 8M+ annual cases.",
-        "Integrated Case Status & Eligibility Services with external vendors, reducing inbound call inquiries and achieving $100K annual cost savings.",
+        "Saved 30+ minutes per Prior Authorization (PA) case and reduced manual job-aid searches by leading the 0-to-1 launch of an AI-powered chatbot based on deep user workflow analysis.",
+        "Boosted system usability and response times by redesigning 150K+ clinical guidelines, collaborating closely with clinicians and technical architects to structure data for AI models.",
+        "Streamlined user journeys and improved efficiency across 8M+ annual cases by directing comprehensive UI/UX redesign initiatives for PA workflows.",
+        "Improved operational resilience, security, and scalability by migrating a high-volume fax system (10K+/hr) to a cloud-native architecture.",
+        "Achieved $100K in annual cost savings and reduced inbound call volume by integrating Case Status & Eligibility Services with external vendor APIs.",
       ],
     },
     {
@@ -52,10 +52,10 @@ export const resumeData = {
       endDate: "2023-11",
       isCurrent: false,
       highlights: [
-        "Contributed to the development of an AI-enabled abstraction platform, leveraging NLP to improve hybrid measure performance through medical record review.",
-        "Managed a portfolio of 300+ HEDIS, AMP, and PQA quality measures, ensuring NCQA compliance and achieving $100K+ operational savings.",
-        "Enabled $50M+ client savings annually by embedding predictive, preventive analytics into quality measurement workflows.",
-        "Conceptualized and piloted GenAI-driven workflow optimizations for OQM users, reducing cognitive load and improving case resolution efficiency.",
+        "Enabled $50M+ in annual client savings by embedding predictive and preventive analytics into quality measurement workflows.",
+        "Achieved $100K+ in operational savings and ensured NCQA compliance by managing a portfolio of 300+ HEDIS, AMP, and PQA quality measures.",
+        "Reduced cognitive load for OQM users and improved case resolution efficiency by conceptualizing and piloting GenAI-driven workflow optimizations.",
+        "Improved hybrid measure performance through medical record review by contributing to the development of an NLP-powered abstraction platform.",
       ],
     },
     {
@@ -67,8 +67,8 @@ export const resumeData = {
       endDate: "2021-06",
       isCurrent: false,
       highlights: [
-        "Conducted market research across 20+ Caribbean insurers, identifying digital transformation opportunities and use cases for document digitization in insurance.",
-        "Recommended vendor solutions for invoice automation, shortening the cash conversion cycle by 30%.",
+        "Shortened the cash conversion cycle by 30% by researching and recommending vendor solutions for document digitization and invoice automation.",
+        "Identified digital transformation opportunities by conducting comprehensive market research across 20+ Caribbean insurers.",
       ],
     },
     {
@@ -80,9 +80,8 @@ export const resumeData = {
       endDate: "2019-10",
       isCurrent: false,
       highlights: [
-        "Developed AWS-based SaaS applications for enterprise clients, collaborating with manufacturing and aerospace stakeholders.",
-        "Built a centralized dashboard across Druva products, improving visibility for 10K+ users and reducing reporting effort by 30%.",
-        "Designed and deployed REST APIs on AWS Lambda & API Gateway, achieving 20% cost savings through optimized execution.",
+        "Reduced reporting effort by 30% and improved data visibility for 10K+ users by building a centralized dashboard spanning multiple Druva enterprise products.",
+        "Achieved 20% cost savings through optimized execution by designing and deploying REST APIs on AWS Lambda and API Gateway.",
       ],
     },
     {
@@ -94,10 +93,9 @@ export const resumeData = {
       endDate: "2019-05",
       isCurrent: false,
       highlights: [
-        "Delivered 6 license authentication features, strengthening security and reducing errors by 25%.",
-        "Led cross-team initiatives, delivering customer-facing features in collaboration with 10+ product teams.",
-        "Migrated key components to Golang, improving scalability by 20% and boosting performance.",
-        "Implemented telemetry services to detect/prevent revenue leakage, recovering $400K+ in perpetual licenses.",
+        "Recovered $400K+ in perpetual licenses by implementing proactive telemetry services to detect and prevent revenue leakage.",
+        "Improved system scalability by 20% and boosted performance by migrating key architectural components to Golang.",
+        "Strengthened security and reduced errors by 25% by delivering 6 critical license authentication features in collaboration with 10+ cross-functional product teams.",
       ],
     },
   ],
@@ -132,33 +130,32 @@ export const resumeData = {
   ],
   skills: [
     {
-      category: "Product",
+      category: "Product Management",
       items: [
-        "Product Management",
-        "Agile & Scrum",
-        "Problem Solving",
-        "Stakeholder Management",
+        "0-to-1 Product Lifecycle",
+        "Go-To-Market Strategy",
         "Product Roadmap",
-        "Product Strategy",
-        "Business Strategy",
-        "Team Management",
+        "User-Centric Design",
+        "Agile & Scrum",
+        "A/B Testing",
+        "Stakeholder Management",
+        "FinOps",
       ],
     },
     {
       category: "Technical",
       items: [
-        "Data Analysis",
-        "AWS",
-        "Jenkins",
-        "AI Tools",
+        "Cloud Native Architecture (AWS, Azure, GCP)",
+        "AI/ML",
         "NLP",
-        "ML",
+        "Prompt Engineering",
         "SQL",
         "Python",
         "Golang",
+        "REST APIs",
       ],
     },
-    { category: "Tools", items: ["Jira", "Rally", "Aha!", "SharePoint", "Tableau", "PowerBI"] },
+    { category: "Data & Analytics", items: ["Tableau", "PowerBI", "Predictive Analytics"] },
   ],
   certifications: [
     { name: "Prompt Engineering with ChatGPT", issuer: "LinkedIn Learning", date: "2025" },

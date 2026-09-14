@@ -150,7 +150,7 @@ export function ResumeView() {
         <div className="space-y-2">
           {skills.map((group) => (
             <div key={group.category} className="flex gap-2">
-              <p className="text-xs font-semibold text-foreground w-24 flex-shrink-0 mt-0.5">
+              <p className="text-xs font-semibold text-foreground w-36 flex-shrink-0 mt-0.5">
                 {group.category}
               </p>
               <p className="text-xs text-muted-foreground">{group.items.join(" · ")}</p>
