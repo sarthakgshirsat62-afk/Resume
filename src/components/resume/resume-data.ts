@@ -1,7 +1,7 @@
 export const resumeData = {
   personalInfo: {
     fullName: "Sarthak Shirsat",
-    headline: "Senior Product Manager",
+    headline: "Senior Product Manager — AI-Powered Observability & Cloud Platforms",
     email: "sarthakgshirsat62@gmail.com",
     phone: "+91 72765 71768",
     location: "Bengaluru, Karnataka, India",
@@ -9,7 +9,7 @@ export const resumeData = {
     linkedin: "www.linkedin.com/in/sarth1964",
     github: "",
     summary:
-      "Senior Technical Product Manager with 7+ years of experience bridging deep technical architecture with user-centric enterprise SaaS. Proven track record of steering 0-to-1 AI/ML products, driving cloud infrastructure strategy, and delivering $50M+ in client impact. Combines an MBA from IIM Indore with hands-on software engineering expertise to align cross-functional engineering teams, optimize cloud governance, and design intuitive, high-scale digital user journeys.",
+      "Senior Product Manager with 7+ years of experience building AI-driven observability, monitoring, and governance platforms across multi-cloud infrastructure (AWS, Azure, GCP). Proven track record leading 0-to-1 AI/ML products that turn predictive analytics and anomaly detection into actionable customer insights, delivering $50M+ in client impact. Combines an MBA from IIM Indore with hands-on software engineering expertise (Golang, REST APIs) to align cross-functional engineering, design, and marketing teams around intuitive, high-scale digital experiences.",
   },
   experience: [
     {
@@ -21,9 +21,9 @@ export const resumeData = {
       endDate: "",
       isCurrent: true,
       highlights: [
-        "Accelerated enterprise cloud and AI adoption by launching a multi-cloud Service Governance application that introduced self-service workflows for new service requests and AI model governance.",
-        "Standardized multi-cloud adoption and centralized consumption alerting by delivering a unified UI experience for cloud onboarding across Cloud Service Providers (CSPs).",
-        "Identified strategic migration opportunities and optimized infrastructure by analyzing 1,991 cloud databases, including 578 deployed on NextGen networking.",
+        "Accelerated enterprise cloud and AI adoption by launching a multi-cloud Service Governance application delivering real-time visibility, self-service workflows, and AI model governance for new service requests.",
+        "Improved infrastructure visibility and standardized multi-cloud adoption by delivering a unified UI experience with centralized consumption monitoring and alerting across Cloud Service Providers (CSPs).",
+        "Identified strategic migration opportunities and optimized infrastructure performance by analyzing 1,991 cloud databases, including 578 running on NextGen networking infrastructure.",
         "Established robust, enterprise-wide automated guardrails for IAM, data residency, and encryption using Azure Policy, AWS SCPs, and GCP Org Policies.",
       ],
     },
@@ -36,10 +36,10 @@ export const resumeData = {
       endDate: "2025-03",
       isCurrent: false,
       highlights: [
-        "Saved 30+ minutes per Prior Authorization (PA) case and reduced manual job-aid searches by leading the 0-to-1 launch of an AI-powered chatbot based on deep user workflow analysis.",
-        "Boosted system usability and response times by redesigning 150K+ clinical guidelines, collaborating closely with clinicians and technical architects to structure data for AI models.",
+        "Saved 30+ minutes per Prior Authorization (PA) case and reduced manual job-aid searches by leading the 0-to-1 launch of an AI-powered chatbot, grounded in root-cause analysis of user workflows.",
+        "Boosted system usability and response times by redesigning 150K+ clinical guidelines, collaborating with clinicians and technical architects to structure data for AI/NLP models.",
         "Streamlined user journeys and improved efficiency across 8M+ annual cases by directing comprehensive UI/UX redesign initiatives for PA workflows.",
-        "Improved operational resilience, security, and scalability by migrating a high-volume fax system (10K+/hr) to a cloud-native architecture.",
+        "Improved operational resilience, security, and scalability by migrating a high-volume fax system (10K+/hr) to a cloud-native, microservices-based architecture.",
         "Achieved $100K in annual cost savings and reduced inbound call volume by integrating Case Status & Eligibility Services with external vendor APIs.",
       ],
     },
@@ -54,7 +54,7 @@ export const resumeData = {
       highlights: [
         "Enabled $50M+ in annual client savings by embedding predictive and preventive analytics into quality measurement workflows.",
         "Achieved $100K+ in operational savings and ensured NCQA compliance by managing a portfolio of 300+ HEDIS, AMP, and PQA quality measures.",
-        "Reduced cognitive load for OQM users and improved case resolution efficiency by conceptualizing and piloting GenAI-driven workflow optimizations.",
+        "Reduced cognitive load for OQM users and improved case resolution efficiency by conceptualizing and piloting GenAI-driven workflow and anomaly-detection optimizations.",
         "Improved hybrid measure performance through medical record review by contributing to the development of an NLP-powered abstraction platform.",
       ],
     },
@@ -80,7 +80,7 @@ export const resumeData = {
       endDate: "2019-10",
       isCurrent: false,
       highlights: [
-        "Reduced reporting effort by 30% and improved data visibility for 10K+ users by building a centralized dashboard spanning multiple Druva enterprise products.",
+        "Reduced reporting effort by 30% and improved data visibility for 10K+ users by building a centralized monitoring dashboard spanning multiple Druva enterprise products.",
         "Achieved 20% cost savings through optimized execution by designing and deploying REST APIs on AWS Lambda and API Gateway.",
       ],
     },
@@ -134,7 +134,7 @@ export const resumeData = {
       items: [
         "0-to-1 Product Lifecycle",
         "Go-To-Market Strategy",
-        "Product Roadmap",
+        "Product Roadmap & KPI Tracking",
         "User-Centric Design",
         "Agile & Scrum",
         "A/B Testing",
@@ -145,9 +145,10 @@ export const resumeData = {
     {
       category: "Technical",
       items: [
-        "Cloud Native Architecture (AWS, Azure, GCP)",
+        "Cloud-Native Architecture (AWS, Azure, GCP)",
         "AI/ML",
         "NLP",
+        "Predictive Analytics & Anomaly Detection",
         "Prompt Engineering",
         "SQL",
         "Python",

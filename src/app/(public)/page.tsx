@@ -20,9 +20,9 @@ const featuredProjects = [
     status: "Production",
   },
   {
-    title: "Cloud Policy & Governance",
+    title: "AI-Powered Cloud Observability & Governance",
     description:
-      "Built enterprise-wide cloud policy & governance framework across AWS, Azure and GCP with automated guardrails and FinOps cost model, cutting wasted spend by ~25%.",
+      "Launched a multi-cloud Service Governance application with real-time observability, self-service workflows, and AI model governance across AWS, Azure and GCP — with automated guardrails and a FinOps cost model cutting wasted spend by ~25%.",
     tech: ["AWS SCPs", "Azure Policy", "FinOps"],
     status: "Enterprise",
   },
@@ -40,7 +40,7 @@ const experience = [
     role: "Senior Product Manager",
     company: "Optum, UHG",
     period: "Mar 2025 — Present",
-    description: "Leading enterprise cloud policy & governance framework across AWS, Azure and GCP.",
+    description: "Leading a multi-cloud AI observability and governance platform across AWS, Azure and GCP.",
   },
   {
     role: "Product Manager",
