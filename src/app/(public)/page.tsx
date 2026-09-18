@@ -37,7 +37,7 @@ const featuredProjects = [
 
 const experience = [
   {
-    role: "Senior Tech Product Manager",
+    role: "Senior Product Manager",
     company: "Optum, UHG",
     period: "Mar 2025 — Present",
     description: "Leading enterprise cloud policy & governance framework across AWS, Azure and GCP.",

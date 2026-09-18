@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const timeline = [
   {
     year: "2025",
-    title: "Senior Tech Product Manager",
+    title: "Senior Product Manager",
     org: "Optum, UHG",
     description: "Leading enterprise cloud policy & governance across AWS, Azure and GCP. Built FinOps cost model cutting wasted cloud spend by ~25%.",
     icon: "☁️",

@@ -1,7 +1,7 @@
 export const resumeData = {
   personalInfo: {
     fullName: "Sarthak Shirsat",
-    headline: "Senior Tech Product Manager",
+    headline: "Senior Product Manager",
     email: "sarthakgshirsat62@gmail.com",
     phone: "+91 72765 71768",
     location: "Bengaluru, Karnataka, India",
@@ -14,7 +14,7 @@ export const resumeData = {
   experience: [
     {
       id: "1",
-      role: "Senior Tech Product Manager",
+      role: "Senior Product Manager",
       company: "Optum, UHG",
       location: "Bengaluru",
       startDate: "2025-03",
