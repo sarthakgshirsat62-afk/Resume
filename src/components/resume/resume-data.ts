@@ -158,6 +158,15 @@ export const resumeData = {
     },
     { category: "Data & Analytics", items: ["Tableau", "PowerBI", "Predictive Analytics"] },
   ],
+  projects: [
+    {
+      id: "1",
+      name: "PM Vault",
+      description:
+        "A curated resource library for product managers — templates, frameworks, and tools organized by task and career stage.",
+      url: "https://pmvaultversion1.vercel.app/",
+    },
+  ],
   certifications: [
     { name: "Prompt Engineering with ChatGPT", issuer: "LinkedIn Learning", date: "2025" },
     {

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
-import { GithubLogo } from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/common/container";
+import { Button } from "@/components/ui/button";
+import { GithubLogo } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight } from "lucide-react";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -30,6 +30,17 @@ const projects: Array<{
     status: "Open Source",
     featured: true,
     category: "AI/ML",
+  },
+  {
+    title: "PM Vault",
+    description:
+      "A curated resource library for product managers — templates, frameworks, and tools for PRD writing, roadmapping, prioritization, and AI product management, organized by task and career stage. Links out to vetted best practices instead of reproducing them.",
+    tech: ["Next.js", "TypeScript", "Supabase", "Vitest"],
+    href: "https://pmvaultversion1.vercel.app/",
+    repoHref: "https://github.com/sarthakgshirsat62-afk/PM-Vault",
+    status: "Live",
+    featured: true,
+    category: "Web App",
   },
   {
     title: "BundleGuard",
@@ -69,7 +80,7 @@ const projects: Array<{
   },
 ];
 
-const categories = ["All", "AI/ML", "DevTools", "Library"];
+const categories = ["All", "AI/ML", "Web App", "DevTools", "Library"];
 
 export default function PortfolioPage() {
   const featured = projects.filter((p) => p.featured);
@@ -84,12 +95,11 @@ export default function PortfolioPage() {
             className="text-4xl sm:text-5xl font-black tracking-tighter mt-4 mb-4"
             style={{ letterSpacing: "-0.04em" }}
           >
-            Things I&apos;ve{" "}
-            <span className="gradient-text">built & shipped</span>
+            Things I&apos;ve <span className="gradient-text">built & shipped</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            A collection of projects ranging from side experiments to production systems.
-            Source code available for most.
+            A collection of projects ranging from side experiments to production systems. Source
+            code available for most.
           </p>
         </div>
 
@@ -98,10 +108,7 @@ export default function PortfolioPage() {
           <p className="data-label mb-6">Featured</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {featured.map((project) => (
-              <div
-                key={project.title}
-                className="framer-card flex flex-col overflow-hidden"
-              >
+              <div key={project.title} className="framer-card flex flex-col overflow-hidden">
                 <div className="h-px w-full bg-gradient-to-r from-blue-400/60 via-violet-400/40 to-pink-400/20" />
                 <div className="flex flex-col flex-1 p-6 gap-5">
                   <div className="flex items-start justify-between">
@@ -129,7 +136,9 @@ export default function PortfolioPage() {
 
                   <div className="flex flex-wrap gap-1.5">
                     {project.tech.slice(0, 3).map((t) => (
-                      <span key={t} className="tech-tag text-[11px]">{t}</span>
+                      <span key={t} className="tech-tag text-[11px]">
+                        {t}
+                      </span>
                     ))}
                     {project.tech.length > 3 && (
                       <span className="tech-tag text-[11px]">+{project.tech.length - 3}</span>
@@ -167,11 +176,15 @@ export default function PortfolioPage() {
                 <div className="flex items-center gap-3 flex-shrink-0">
                   <div className="hidden sm:flex flex-wrap gap-1">
                     {project.tech.slice(0, 2).map((t) => (
-                      <span key={t} className="tech-tag text-[11px]">{t}</span>
+                      <span key={t} className="tech-tag text-[11px]">
+                        {t}
+                      </span>
                     ))}
                   </div>
                   {project.stars !== undefined && (
-                    <span className="text-xs text-muted-foreground font-mono">★ {project.stars}</span>
+                    <span className="text-xs text-muted-foreground font-mono">
+                      ★ {project.stars}
+                    </span>
                   )}
                   <div className="flex gap-1">
                     <a href={project.repoHref} target="_blank" rel="noopener noreferrer">

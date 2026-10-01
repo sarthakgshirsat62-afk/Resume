@@ -6,7 +6,7 @@ import { formatDateRange } from "@/utils/date";
 import { Document, Link, Page, Text, View } from "@react-pdf/renderer";
 
 export function PdfDocument() {
-  const { personalInfo, experience, education, skills, certifications } = resumeData;
+  const { personalInfo, experience, education, skills, projects, certifications } = resumeData;
 
   return (
     <Document title={`${personalInfo.fullName} — Resume`} author={personalInfo.fullName}>
@@ -96,6 +96,21 @@ export function PdfDocument() {
             <View key={group.category} style={s.skillRow}>
               <Text style={s.skillCategory}>{group.category}</Text>
               <Text style={s.skillItems}>{group.items.join(" · ")}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={s.section}>
+          <Text style={s.sectionTitle}>Projects</Text>
+          {projects.map((project) => (
+            <View key={project.id} style={s.entry} wrap={false}>
+              <View style={s.entryHeaderRow}>
+                <Text style={s.entryTitle}>{project.name}</Text>
+                <Link style={s.entryDate} src={project.url}>
+                  {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                </Link>
+              </View>
+              <Text style={s.summaryText}>{project.description}</Text>
             </View>
           ))}
         </View>

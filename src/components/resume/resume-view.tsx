@@ -16,7 +16,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 
 export function ResumeView() {
-  const { personalInfo, experience, education, skills, certifications } = resumeData;
+  const { personalInfo, experience, education, skills, projects, certifications } = resumeData;
 
   return (
     <div className="p-8 md:p-12 space-y-8 text-sm font-[family-name:var(--font-geist-sans)]">
@@ -154,6 +154,31 @@ export function ResumeView() {
                 {group.category}
               </p>
               <p className="text-xs text-muted-foreground">{group.items.join(" · ")}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Projects */}
+      <div>
+        <SectionTitle>Projects</SectionTitle>
+        <div className="space-y-3">
+          {projects.map((project) => (
+            <div key={project.id} className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <h3 className="font-semibold text-foreground">{project.name}</h3>
+                <p className="text-muted-foreground leading-relaxed text-xs mt-0.5">
+                  {project.description}
+                </p>
+              </div>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-emerald-600 dark:text-emerald-400 font-medium flex-shrink-0 hover:underline"
+              >
+                {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+              </a>
             </div>
           ))}
         </div>
